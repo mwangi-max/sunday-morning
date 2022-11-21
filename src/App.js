@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { buddies } from './persons';
+import SinglePerson from './SinglePerson';
 
-function App() {
+const App = () => {
+ const [people,setPeople] = React.useState(buddies);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <section>
+     <article>
+      <h2>Today {people.length} birthdays are on the card</h2>
+      {
+       people.map((buddy)=>{
+        const {id,name,job,image} = buddy;
+        return <SinglePerson key={id} {...buddy}/>
+       })
+      }
+       
+       <div className='btn'>
+               <button onClick={()=>setPeople([])} className='click'>CLEAR ALL</button>
+       </div>
+      
+
+     </article>
+    </section>
+  )
 }
 
-export default App;
+export default App
